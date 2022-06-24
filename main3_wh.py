@@ -2,6 +2,7 @@ import asyncio
 import ssl
 import sys
 
+from aiogram.utils.executor import start_webhook
 from aiohttp import web
 
 from aiogram import Bot, types
