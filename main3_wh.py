@@ -1,22 +1,13 @@
-import asyncio
-import ssl
-import sys
+import os
 
 from aiogram.utils.executor import start_webhook
-from aiohttp import web
 
 from aiogram import Bot, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import Dispatcher
-from aiogram.dispatcher.webhook import get_new_configured_app, SendMessage
-from aiogram.types import ChatType, ParseMode, ContentTypes
-from aiogram.utils.markdown import hbold, bold, text, link
 
-import config
-
-TOKEN = config.BOT_TOKEN
-
-HEROKU_APP_NAME = config.HEROKU_APP_NAME
+TOKEN = os.getenv('BOT_TOKEN')
+HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME')
 # webhook settings
 WEBHOOK_HOST = f'https://{HEROKU_APP_NAME}.herokuapp.com'
 WEBHOOK_PATH = f'/webhook/{TOKEN}'
@@ -26,7 +17,7 @@ WEBHOOK_URL = f'{WEBHOOK_HOST}{WEBHOOK_PATH}'
 WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = 8000
 
-bot = Bot(token=config.BOT_TOKEN)
+bot = Bot(token=TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
